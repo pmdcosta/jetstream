@@ -1,0 +1,24 @@
+version: '3.7'
+services:
+  nats-0:
+    image: nats
+    command: "-m 8080 -js --server_name nats-0 --cluster_name nats --cluster nats://0.0.0.0:8222 --routes nats://nats-1:8222,nats://nats-2:8222"
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+      - "8080:8080"
+    networks: ["nats"]
+
+  nats-1:
+    image: nats
+    command: "-js --server_name nats-1 --cluster_name nats --cluster nats://0.0.0.0:8222 --routes nats://nats-0:8222,nats://nats-2:8222"
+    networks: [ "nats" ]
+
+  nats-2:
+    image: nats
+    command: "-js --server_name nats-2 --cluster_name nats --cluster nats://0.0.0.0:8222 --routes nats://nats-0:8222,nats://nats-1:8222"
+    networks: [ "nats" ]
+
+networks:
+  nats:
+    name: nats

@@ -1,0 +1,27 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+bin
+*.db
+
+# Test binary
+*.test
+
+# Output of the go coverage tool
+*.out
+coverage.txt
+race.out
+result.out
+integration.out
+
+# Mocks
+*_mock.go
+
+# Others
+*.swp
+.env
+tmp
+vendor
